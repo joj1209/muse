@@ -1,0 +1,26 @@
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">기준일자</th>
+            <th scope="col">종목코드</th>
+            <th scope="col">종목명</th>
+            <th scope="col">전일가</th>
+            <th scope="col">현재가</th>
+            <th scope="col">거래량</th>
+            <th scope="col">입력일시</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for board in board_list %}
+            <tr>
+                <td>{{board.strd_dt}}</td>
+                <td>{{board.stock_cd}}</td>
+                <td>{{board.stock_nm}}</td>
+                <td>{{board.pre_price}}</td>
+                <td>{{board.today_price}}</td>
+                <td>{{board.trading_volume}}</td>
+                <td>{{board.ins_dt}}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>

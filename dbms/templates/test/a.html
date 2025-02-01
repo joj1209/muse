@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ko">
+	<head>
+		<title>Web Demo</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" >
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta content="user-scalable=yes, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width" name="viewport">
+		<script>
+			function goPage(page){
+				fetch(page + ".html")
+				.then(response => {
+					return response.text()
+				})
+				.then(data => {
+					document.querySelector('#contents').innerHTML = data;
+				})
+				.catch(error => {
+					alert(error);
+				});
+			}
+		</script>
+	</head>
+
+	<body>
+		<div id="wrapper">
+			<!-- header -->
+			<header id="header">
+				<div class="head-box">
+					<!-- 메뉴 -->
+					<nav>
+						<ul class="gnb">
+							<li><a href="#"><i class="ico">사용자 메뉴</i></a>
+								<div class="sub-menu">
+									<i class="ico"></i>
+									<span class="tit">사용자 메뉴</span>
+									<ul>
+										<li><a href="javascript:goPage('page1')">페이지1</a></li>
+										<li><a href="javascript:goPage('page2')">페이지2</a></li>
+									</ul>
+								</div>
+							</li>
+						</ul>
+					</nav>
+				</div>
+			</header>
+			<!-- //header -->
+			
+			<!-- container -->
+			<div id="contents">
+				<div class="head">
+					<h1>메인 화면</h1>
+					<div class="location">
+						<a href="#">HOME</a><span>Main</span>
+					</div>
+				</div>
+				<div class="list">
+					<h2 class="title">목록</h2>
+				</div>
+			</div>
+			<!-- //container -->
+		</div>
+	</body>
+</html>
+
+
+
+
+
+2) page1.html
+
+
+	<div class="head">
+		<h1>페이지1</h1>
+		<div class="location">
+			<a href="#">HOME</a><span>페이지1</span>
+		</div>
+	</div>
+	<div class="sub">
+		<div class="sub-box">
+			<h2 class="title">페이지1</h2>
+		</div>
+	</div>
+3) page2.html
+
+
+	<div class="head">
+		<h1>페이지2</h1>
+		<div class="location">
+			<a href="#">HOME</a><span>페이지2</span>
+		</div>
+	</div>
+	<div class="sub">
+		<div class="sub-box">
+			<h2 class="title">페이지2</h2>
+		</div>
+	</div>
+​

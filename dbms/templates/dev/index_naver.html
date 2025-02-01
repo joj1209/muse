@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>오늘의 증시</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+
+</head>
+<body>
+    <div class="container-fluid">  <!-- 좌우 여백이 없는 container (꽉 참) -->
+        {% include 'dbms/top_navbar.html' %}
+    </div>
+    <div class="container">  <!-- 좌우 여백이 있는 container  -->
+        <div class="row mt-3">
+            <div class="col align-self-center text-center">
+                {% load static %}
+                <img src="{% static 'image/stacks-of-coins-arranged-in-a-bar-graph.jpg' %}" width="700px" height="200px">
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row justify-content-between">
+                            <div class="col">
+                                <h5 class="card-title">즐겨찾기 Top 5</h5>
+                            </div>
+                            {% include 'dbms/list_naver.html' %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</body>
+</html>

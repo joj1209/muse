@@ -1,0 +1,677 @@
+<!doctype html>
+<html lang="en" data-bs-theme="auto">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" >
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta content="user-scalable=yes, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width" name="viewport">
+        <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+        <script>
+            function loadMainContent(menuNumber) {
+                const mainContent = document.getElementById('main-content');
+                mainContent.innerHTML = "";
+    
+                let content = '';
+    
+                // Generate different content based on the selected menu item
+                switch (menuNumber) {
+                    case 101:
+                        content = document.getElementById('main-content');
+                        break;
+                    case 201:
+                        content = '<h2>Stock Top 5</h2>\
+                                    <div class="table-responsive small">\
+                                        <table class="table table-striped table-sm">\
+                                            <table class="table table-striped">\
+                                                <thead>\
+                                                    <tr>\
+                                                        <th scope="col">기준일자</th>\
+                                                        <th scope="col">종목코드</th>\
+                                                        <th scope="col">종목명</th>\
+                                                        <th scope="col">전일가</th>\
+                                                        <th scope="col">현재가</th>\
+                                                        <th scope="col">거래량</th>\
+                                                        <th scope="col">입력일시</th>\
+                                                    </tr>\
+                                                </thead>\
+                                                <tbody>\
+                                                    {% for board in board_list %}\
+                                                        <tr>\
+                                                            <td>{{board.strd_dt}}</td>\
+                                                            <td>{{board.stock_cd}}</td>\
+                                                            <td>{{board.stock_nm}}</td>\
+                                                            <td>{{board.pre_price}}</td>\
+                                                            <td>{{board.today_price}}</td>\
+                                                            <td>{{board.trading_volume}}</td>\
+                                                            <td>{{board.ins_dt}}</td>\
+                                                        </tr>\
+                                                    {% endfor %}\
+                                                </tbody>\
+                                            </table>\
+                                        </table>\
+                                    </div>';
+                        break;
+                    case 202:
+                        content = '<h2>전기차 출고대수 Top 10</h2>\
+                                    <div class="table-responsive small">\
+                                        <table class="table table-striped table-sm">\
+                                            <table class="table table-striped">\
+                                                <thead>\
+                                                    <tr>\
+                                                        <th scope="col">기준일자</th>\
+                                                        <th scope="col">시도명</th>\
+                                                        <th scope="col">지역명</th>\
+                                                        <th scope="col">접수방법</th>\
+                                                        <th scope="col">접수순위</th>\
+                                                        <th scope="col">보급대수</th>\
+                                                        <th scope="col">입력일시</th>\
+                                                    </tr>\
+                                                </thead>\
+                                                <tbody>\
+                                                    {% for board in ev_list %}\
+                                                        <tr>\
+                                                            <td>{{board.strd_dt}}</td>\
+                                                            <td>{{board.sido_nm}}</td>\
+                                                            <td>{{board.region}}</td>\
+                                                            <td>{{board.receipt_way}}</td>\
+                                                            <td>{{board.receipt_priority}}</td>\
+                                                            <td>{{board.value}}</td>\
+                                                            <td>{{board.ins_dt}}</td>\
+                                                        </tr>\
+                                                    {% endfor %}\
+                                                </tbody>\
+                                            </table>\
+                                        </table>\
+                                    </div>';
+                        break;
+                    case 203:
+                        content = '<h2>FinanceDataReader 글러벌마켓 Top 10</h2>\
+                                    <div class="table-responsive small">\
+                                        <table class="table table-striped table-sm">\
+                                            <table class="table table-striped">\
+                                                <thead>\
+                                                    <tr>\
+                                                        <th scope="col">기준일자</th>\
+                                                        <th scope="col">마켓</th>\
+                                                        <th scope="col">주식일자</th>\
+                                                        <th scope="col">시가</th>\
+                                                        <th scope="col">고가</th>\
+                                                        <th scope="col">저가</th>\
+                                                        <th scope="col">종가</th>\
+                                                        <th scope="col">거래량</th>\
+                                                    </tr>\
+                                                </thead>\
+                                                <tbody>\
+                                                    {% for board in market_list %}\
+                                                        <tr>\
+                                                            <td>{{board.strd_dt}}</td>\
+                                                            <td>{{board.market}}</td>\
+                                                            <td>{{board.stock_day}}</td>\
+                                                            <td>{{board.opening_price}}</td>\
+                                                            <td>{{board.high_price}}</td>\
+                                                            <td>{{board.low_price}}</td>\
+                                                            <td>{{board.closing_price}}</td>\
+                                                            <td>{{board.volume}}</td>\
+                                                        </tr>\
+                                                    {% endfor %}\
+                                                </tbody>\
+                                            </table>\
+                                        </table>\
+                                    </div>';
+                        break;
+                    case 204:
+                        content = '<h2>FinanceDataReader 네이버 블러그 키워드 검색 : 시흥대야역 맛집</h2>\
+                                    <div class="table-responsive small">\
+                                        <table class="table table-striped table-sm">\
+                                            <table class="table table-striped">\
+                                                <thead>\
+                                                    <tr>\
+                                                        <th scope="col">기준일자</th>\
+                                                        <th scope="col">검색어</th>\
+                                                        <th scope="col">제목</th>\
+                                                        <th scope="col">링크</th>\
+                                                        <th scope="col">입력일시</th>\
+                                                    </tr>\
+                                                </thead>\
+                                                <tbody>\
+                                                    {% for board in blog_crawl_list %}\
+                                                        <tr>\
+                                                            <td>{{board.strd_dt}}</td>\
+                                                            <td>{{board.keword}}</td>\
+                                                            <td>{{board.title}}</td>\
+                                                            <td>{{board.link}}</td>\
+                                                            <td>{{board.ins_dt}}</td>\
+                                                        </tr>\
+                                                    {% endfor %}\
+                                                </tbody>\
+                                            </table>\
+                                        </table>\
+                                    </div>';
+                        break;
+                    case 205:
+                        content = '<h2>Youtube 키워드 검색 : UHD모니터</h2>\
+                                    <div class="table-responsive small">\
+                                        <table class="table table-striped table-sm">\
+                                            <table class="table table-striped">\
+                                                <thead>\
+                                                    <tr>\
+                                                        <th scope="col">기준일자</th>\
+                                                        <th scope="col">검색어</th>\
+                                                        <th scope="col">링크</th>\
+                                                        <th scope="col">비디어ID</th>\
+                                                        <th scope="col">본문</th>\
+                                                        <th scope="col">댓글게시자</th>\
+                                                        <th scope="col">입력일시</th>\
+                                                    </tr>\
+                                                </thead>\
+                                                <tbody>\
+                                                    {% for board in youtube_comment_list %}\
+                                                        <tr>\
+                                                            <td>{{board.strd_dt}}</td>\
+                                                            <td>{{board.keword}}</td>\
+                                                            <td>{{board.link}}</td>\
+                                                            <td>{{board.video_id}}</td>\
+                                                            <td>{{board.video_id}}</td>\
+                                                            <td>{{board.comment_author}}</td>\
+                                                            <td>{{board.ins_dt}}</td>\
+                                                        </tr>\
+                                                    {% endfor %}\
+                                                </tbody>\
+                                            </table>\
+                                        </table>\
+                                    </div>';
+                        break;
+                    case 206:
+                        content = '{% load static %}<div class="content-item">\
+                                    <h2>Kakao AI Image</h2>\
+                                        <div class="table-responsive small">\
+                                            <table class="table table-striped table-sm">\
+                                                <table class="table table-striped">\
+                                                    <thead>\
+                                                        <tr>\
+                                                            <th scope="col">기준일자</th>\
+                                                            <th scope="col">제시어</th>\
+                                                        </tr>\
+                                                    </thead>\
+                                                    <tbody>\
+                                                        {% for board in kakao_ai_image %}\
+                                                            <tr>\
+                                                                <td>{{board.strd_dt}}</td>\
+                                                                <td>{{board.suggest_word}}</td>\
+                                                            </tr>\
+                                                        {% endfor %}\
+                                                    </tbody>\
+                                                </table>\
+                                            </table>\
+                                            <img src="{% static 'image/test1.png' %}" onclick="reloadimg()" width="600px" height="600px">\
+                                        </div>';
+                        break;
+                    case 207:
+                        content = '<h2>Kakao API Talk</h2>\
+                                    <div class="table-responsive small">\
+                                        <table class="table table-striped table-sm">\
+                                            <table class="table table-striped" #style="table-layout: fixed">\
+                                                <thead>\
+                                                    <tr>\
+                                                        <th width="100">기준일자</th>\
+                                                        <th scope="col">접근토큰</th>\
+                                                        <th scope="col">토큰타입</th>\
+                                                        <th scope="col">갱신토큰</th>\
+                                                        <th scope="col">접근범위</th>\
+                                                        <th scope="col">변경일시</th>\
+                                                        <th scope="col">입력일시</th>\
+                                                    </tr>\
+                                                </thead>\
+                                                <tbody>\
+                                                    {% for board in kakao_talk %}\
+                                                        <tr>\
+                                                            <td>{{board.strd_dt}}</td>\
+                                                            <td>{{board.access_token}}</td>\
+                                                            <td>{{board.token_type}}</td>\
+                                                            <td>{{board.refresh_token}}</td>\
+                                                            <td>{{board.scope}}</td>\
+                                                            <td>{{board.upd_dt}}</td>\
+                                                            <td>{{board.ins_dt}}</td>\
+                                                        </tr>\
+                                                    {% endfor %}\
+                                                </tbody>\
+                                            </table>\
+                                        </table>\
+                                    </div>';
+                        break;
+                    case 208:
+                        content = '<h2>Public Data : Apartment Trade</h2>\
+                                    <div class="table-responsive small">\
+                                        <table class="table table-striped table-sm">\
+                                            <table class="table table-striped" #style="table-layout: fixed">\
+                                                <thead>\
+                                                    <tr>\
+                                                        <th width="100">기준일자</th>\
+                                                        <th scope="col">법정동</th>\
+                                                        <th scope="col">도로명</th>\
+                                                        <th scope="col">단지명</th>\
+                                                        <th scope="col">전용면적</th>\
+                                                        <th scope="col">계약년도</th>\
+                                                        <th scope="col">거래금액</th>\
+                                                        <th scope="col">층</th>\
+                                                        <th scope="col">건축년도</th>\
+                                                        <th scope="col">입력일시</th>\
+                                                    </tr>\
+                                                </thead>\
+                                                <tbody>\
+                                                    {% for board in public_apt_trade %}\
+                                                        <tr>\
+                                                            <td>{{board.strd_dt}}</td>\
+                                                            <td>{{board.sgg_cd}}</td>\
+                                                            <td>{{board.road_nm}}</td>\
+                                                            <td>{{board.apt_nm}}</td>\
+                                                            <td>{{board.excul_use_area}}</td>\
+                                                            <td>{{board.deal_year}}</td>\
+                                                            <td>{{board.deal_amount}}</td>\
+                                                            <td>{{board.floor}}</td>\
+                                                            <td>{{board.build_year}}</td>\
+                                                            <td>{{board.ins_dt}}</td>\
+                                                        </tr>\
+                                                    {% endfor %}\
+                                                </tbody>\
+                                            </table>\
+                                        </table>\
+                                    </div>';
+                        break;
+                    case 209:
+                        content = '<h2>기상청 : 동네별시간예보</h2>\
+                                    <div class="table-responsive small">\
+                                        <table class="table table-striped table-sm">\
+                                            <table class="table table-striped" #style="table-layout: fixed">\
+                                                <thead>\
+                                                    <tr>\
+                                                        <th width="100">기준일자</th>\
+                                                        <th scope="col">기준시간</th>\
+                                                        <th scope="col">카테고리</th>\
+                                                        <th scope="col">예보지점X좌표</th>\
+                                                        <th scope="col">예보지점Y좌표</th>\
+                                                        <th scope="col">강수량</th>\
+                                                        <th scope="col">입력일시</th>\
+                                                    </tr>\
+                                                </thead>\
+                                                <tbody>\
+                                                    {% for board in kma_forecast %}\
+                                                        <tr>\
+                                                            <td>{{board.strd_dt}}</td>\
+                                                            <td>{{board.strd_tm}}</td>\
+                                                            <td>{{board.category}}</td>\
+                                                            <td>{{board.nx}}</td>\
+                                                            <td>{{board.ny}}</td>\
+                                                            <td>{{board.obsr_value}}</td>\
+                                                            <td>{{board.ins_dt}}</td>\
+                                                        </tr>\
+                                                    {% endfor %}\
+                                                </tbody>\
+                                            </table>\
+                                        </table>\
+                                    </div>';
+                        break;
+                    case 210:
+                        content = '<h2>Jeju API : 지역별 시간단위 방문자수</h2>\
+                                    <div class="table-responsive small">\
+                                        <table class="table table-striped table-sm">\
+                                            <table class="table table-striped" #style="table-layout: fixed">\
+                                                <thead>\
+                                                    <tr>\
+                                                        <th width="100">기준일자</th>\
+                                                        <th scope="col">등록일자</th>\
+                                                        <th scope="col">시군구</th>\
+                                                        <th scope="col">읍면동</th>\
+                                                        <th scope="col">성별</th>\
+                                                        <th scope="col">연령대</th>\
+                                                        <th scope="col">거주인구</th>\
+                                                        <th scope="col">근무인구</th>\
+                                                        <th scope="col">방문자수</th>\
+                                                        <th scope="col">입력일시</th>\
+                                                    </tr>\
+                                                </thead>\
+                                                <tbody>\
+                                                    {% for board in jeju_api_flo_pop %}\
+                                                        <tr>\
+                                                            <td>{{board.strd_dt}}</td>\
+                                                            <td>{{board.regist_dt}}</td>\
+                                                            <td>{{board.city}}</td>\
+                                                            <td>{{board.emd}}</td>\
+                                                            <td>{{board.gender}}</td>\
+                                                            <td>{{board.age_group}}</td>\
+                                                            <td>{{board.resd_pop}}</td>\
+                                                            <td>{{board.work_pop}}</td>\
+                                                            <td>{{board.visit_pop}}</td>\
+                                                            <td>{{board.ins_dt}}</td>\
+                                                        </tr>\
+                                                    {% endfor %}\
+                                                </tbody>\
+                                            </table>\
+                                        </table>\
+                                    </div>';
+                        break;
+                    case 211:
+                        content = '<h2>Seoul API : 자치구단위 서울 생활인구(장기체류 외국인)</h2>\
+                                    <div class="table-responsive small">\
+                                        <table class="table table-striped table-sm">\
+                                            <table class="table table-striped" #style="table-layout: fixed">\
+                                                <thead>\
+                                                    <tr>\
+                                                        <th width="100">기준일자</th>\
+                                                        <th scope="col">기준일ID</th>\
+                                                        <th scope="col">시간대구분</th>\
+                                                        <th scope="col">자치구코드</th>\
+                                                        <th scope="col">총생활인구수</th>\
+                                                        <th scope="col">중국인체류인구수</th>\
+                                                        <th scope="col">중국외 외국인체류인구수</th>\
+                                                        <th scope="col">입력일시</th>\
+                                                    </tr>\
+                                                </thead>\
+                                                <tbody>\
+                                                    {% for board in seoul_api_for_pop %}\
+                                                        <tr>\
+                                                            <td>{{board.strd_dt}}</td>\
+                                                            <td>{{board.stdr_de_id}}</td>\
+                                                            <td>{{board.tmzon_pd_se}}</td>\
+                                                            <td>{{board.adstrd_code_se}}</td>\
+                                                            <td>{{board.tot_lvpop_co}}</td>\
+                                                            <td>{{board.china_staypop_co}}</td>\
+                                                            <td>{{board.etc_staypop_co}}</td>\
+                                                            <td>{{board.ins_dt}}</td>\
+                                                        </tr>\
+                                                    {% endfor %}\
+                                                </tbody>\
+                                            </table>\
+                                        </table>\
+                                    </div>';
+                        break;
+                    case 212:
+                        content = '<h2>Apach Batch 통계</h2>\
+                                    <div class="table-responsive small">\
+                                        <table class="table table-striped table-sm">\
+                                            <table class="table table-striped" #style="table-layout: fixed">\
+                                                <thead>\
+                                                    <tr>\
+                                                        <th width="100">기준일자</th>\
+                                                        <th scope="col">API명</th>\
+                                                        <th scope="col">API데이터구분</th>\
+                                                        <th scope="col">적재건수</th>\
+                                                        <th scope="col">메모</th>\
+                                                        <th scope="col">입력일시</th>\
+                                                    </tr>\
+                                                </thead>\
+                                                <tbody>\
+                                                    {% for board in api_batch_list %}\
+                                                        <tr>\
+                                                            <td>{{board.strd_dt}}</td>\
+                                                            <td>{{board.api_nm}}</td>\
+                                                            <td>{{board.data_gb}}</td>\
+                                                            <td>{{board.data_cnt}}</td>\
+                                                            <td>{{board.memo}}</td>\
+                                                            <td>{{board.ins_dt}}</td>\
+                                                        </tr>\
+                                                    {% endfor %}\
+                                                </tbody>\
+                                            </table>\
+                                        </table>\
+                                    </div>';
+                        break;    
+                }
+    
+                mainContent.innerHTML = content;
+            }
+    
+            // Load initial content
+            loadMainContent(1);
+        </script>
+        {% load static %}
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <title>W.S.C.</title>
+
+        <link
+            rel="canonical"
+            href="https://getbootstrap.com/docs/5.3/examples/headers/">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3">
+        <link rel="stylesheet" href="{% static 'assets/dist/css/bootstrap.min.css' %}">
+        <link rel="stylesheet" href="{% static 'assets/dist/css/dashboard.css' %}">
+
+        <!-- Custom styles for this template -->
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.min.css"
+            rel="stylesheet">
+
+        <style >
+            .b-example-divider {
+                width: 100%;
+                height: 1rem;
+                background-color: rgba(0, 0, 0, .1);
+                border: solid rgba(0, 0, 0, .15);
+                border-width: 1px 0;
+                box-shadow: inset 0 0.5em 1.5em rgba(0, 0, 0, .1), inset 0 0.125em 0.5em rgba(0, 0, 0, .15);
+            }
+        </style>
+
+        
+
+    </head>
+    <body>
+        <h1 class="visually-hidden">Headers examples</h1>
+
+        <!-- header start -->
+        <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
+            <symbol id="bootstrap" viewbox="0 0 118 94">
+                <title>Bootstrap</title>
+                <path
+                    fill-rule="evenodd"
+                    clip-rule="evenodd"
+                    d="M24.509 0c-6.733 0-11.715 5.893-11.492 12.284.214 6.14-.064 14.092-2.066 20.577C8.943 39.365 5.547 43.485 0 44.014v5.972c5.547.529 8.943 4.649 10.951 11.153 2.002 6.485 2.28 14.437 2.066 20.577C12.794 88.106 17.776 94 24.51 94H93.5c6.733 0 11.714-5.893 11.491-12.284-.214-6.14.064-14.092 2.066-20.577 2.009-6.504 5.396-10.624 10.943-11.153v-5.972c-5.547-.529-8.934-4.649-10.943-11.153-2.002-6.484-2.28-14.437-2.066-20.577C105.214 5.894 100.233 0 93.5 0H24.508zM80 57.863C80 66.663 73.436 72 62.543 72H44a2 2 0 01-2-2V24a2 2 0 012-2h18.437c9.083 0 15.044 4.92 15.044 12.474 0 5.302-4.01 10.049-9.119 10.88v.277C75.317 46.394 80 51.21 80 57.863zM60.521 28.34H49.948v14.934h8.905c6.884 0 10.68-2.772 10.68-7.727 0-4.643-3.264-7.207-9.012-7.207zM49.948 49.2v16.458H60.91c7.167 0 10.964-2.876 10.964-8.281 0-5.406-3.903-8.178-11.425-8.178H49.948z"></path>
+            </symbol>
+        </svg>
+
+        <div class="container">
+            <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
+                <a
+                    href="/"
+                    class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
+                    <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"/></svg>
+                    <span class="fs-4">Web Scraping & Crawling</span>
+                </a>
+
+                <ul class="nav nav-pills">
+                    <li class="nav-item">
+                        <a href="/" class="nav-link active" aria-current="page">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">Features</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">FAQs</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">Login</a>
+                    </li>
+                </ul>
+            </header>
+        </div>
+        <!-- header end -->
+
+        <!-- main(section) start -->
+        <div class="container-fluid">
+            <div class="row">
+                <div class="sidebar border border-right col-md-3 col-lg-2 p-0 bg-body-tertiary">
+                    <h6
+                        class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-body-secondary text-uppercase">
+                        <span>Open API</span>
+                        <a class="link-secondary" href="#" aria-label="Add a new report">
+                            <svg class="bi"><use xlink:href="#plus-circle"/></svg>
+                        </a>
+                    </h6>
+                    <ul class="nav flex-column mb-auto">
+                        <li class="nav-item">
+                            <a class="nav-link d-flex align-items-center gap-2" href="#" onclick="loadMainContent(201)">
+                                <svg class="bi"><use xlink:href="#file-earmark-text"/></svg>
+                                Naver Finance
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link d-flex align-items-center gap-2" href="#" onclick="loadMainContent(202)">
+                                <svg class="bi"><use xlink:href="#file-earmark-text"/></svg>
+                                EV Portal
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link d-flex align-items-center gap-2" href="#" onclick="loadMainContent(203)">
+                                <svg class="bi"><use xlink:href="#file-earmark-text"/></svg>
+                                Finance Data Reader
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link d-flex align-items-center gap-2" href="#" onclick="loadMainContent(204)">
+                                <svg class="bi"><use xlink:href="#file-earmark-text"/></svg>
+                                Naver API
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link d-flex align-items-center gap-2" href="#" onclick="loadMainContent(205)">
+                                <svg class="bi"><use xlink:href="#file-earmark-text"/></svg>
+                                Google API
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link d-flex align-items-center gap-2" href="#" onclick="loadMainContent(206)">
+                                <svg class="bi"><use xlink:href="#file-earmark-text"/></svg>
+                                Kakao API
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link d-flex align-items-center gap-2" href="#" onclick="loadMainContent(207)">
+                                <svg class="bi"><use xlink:href="#file-earmark-text"/></svg>
+                                Kakao API(KaTalk)
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link d-flex align-items-center gap-2" href="#" onclick="loadMainContent(208)">
+                                <svg class="bi"><use xlink:href="#file-earmark-text"/></svg>
+                                Public API
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link d-flex align-items-center gap-2" href="#" onclick="loadMainContent(209)">
+                                <svg class="bi"><use xlink:href="#file-earmark-text"/></svg>
+                                kma API
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link d-flex align-items-center gap-2" href="#" onclick="loadMainContent(210)">
+                                <svg class="bi"><use xlink:href="#file-earmark-text"/></svg>
+                                Juju API
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link d-flex align-items-center gap-2" href="#" onclick="loadMainContent(211)">
+                                <svg class="bi"><use xlink:href="#file-earmark-text"/></svg>
+                                Seoul API
+                            </a>
+                        </li>
+                    </ul>
+
+                    <hr class="my-3">
+
+                    <h6
+                        class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-body-secondary text-uppercase">
+                        <span>Schedule</span>
+                        <a class="link-secondary" href="#" aria-label="Add a new report">                        
+                            <svg class="bi"><use xlink:href="#plus-circle"/></svg>
+                        </a>
+                    </h6>
+                    <ul class="nav flex-column mb-auto">
+                        <li class="nav-item">
+                            <a class="nav-link d-flex align-items-center gap-2" href="#">
+                                <svg class="bi"><use xlink:href="#gear-wide-connected"/></svg>
+                                Airflow
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            {% comment %} <a class="nav-link d-flex align-items-center gap-2" href="#"> {% endcomment %}
+                            <a class="nav-link d-flex align-items-center gap-2" href="#" onclick="loadMainContent(212)">    
+                                <svg class="bi"><use xlink:href="#door-closed"/></svg>
+                                ApachBatch
+                            </a>
+                        </li>
+                    </ul>
+
+                    <hr class="my-3">
+                    <h6
+                        class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-body-secondary text-uppercase">
+                        <span>Reports</span>
+                        <a class="link-secondary" href="#" aria-label="Add a new report">
+                            <svg class="bi"><use xlink:href="#plus-circle"/></svg>
+                        </a>
+                    </h6>
+                    <ul class="nav flex-column mb-auto">
+                        <li class="nav-item">
+                            <a class="nav-link d-flex align-items-center gap-2" href="#">
+                                <svg class="bi"><use xlink:href="#gear-wide-connected"/></svg>
+                                Dashboard
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link d-flex align-items-center gap-2" href="#">
+                                <svg class="bi"><use xlink:href="#door-closed"/></svg>
+                                Excel
+                            </a>
+                        </li>
+                    </ul>
+
+                </div>
+
+                <!-- main/grid start -->
+                <main id="main-content" class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+
+                    <h2>Main image preparing</h2>
+                    <div class="table-responsive small">
+                        <img src="{% static 'image/stacks-of-coins-arranged-in-a-bar-graph.jpg' %}" width="900px" height="700px">
+                        <table class="table table-striped table-sm">
+                            {% comment %} {% include 'dbms/list_naver.html' %} {% endcomment %}
+                        </table>
+                    </div>
+                </main>
+                <!-- main/grid end -->
+
+            </div>
+        </div>
+        <!-- main(section) start -->
+
+        <!-- footer start -->
+        <div class="b-example-divider"></div>
+
+        <div class="container">
+            <footer class="py-3 my-4">
+                <ul class="nav justify-content-center border-bottom pb-3 mb-3">
+                    <li class="nav-item">
+                        <a href="#" class="nav-link px-2 text-body-secondary">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link px-2 text-body-secondary">Features</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link px-2 text-body-secondary">Pricing</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link px-2 text-body-secondary">FAQs</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link px-2 text-body-secondary">About</a>
+                    </li>
+                </ul>
+                <p class="text-center text-body-secondary">&copy; 2024 Company, Inc</p>
+            </footer>
+        </div>
+        <!-- footer end -->
+
+    </body>
+</html>

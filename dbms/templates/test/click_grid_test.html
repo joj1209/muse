@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Left Menu with Main Grid</title>
+        <style>
+            body {
+                display: flex;
+                font-family: Arial, sans-serif;
+            }
+            #menu {
+                width: 200px;
+                background-color: #f4f4f4;
+                padding: 20px;
+                box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+            }
+            #menu ul {
+                list-style-type: none;
+                padding: 0;
+            }
+            #menu ul li {
+                margin: 10px 0;
+            }
+            #menu ul li a {
+                text-decoration: none;
+                color: #333;
+                display: block;
+                padding: 10px;
+                background-color: #e4e4e4;
+                border-radius: 4px;
+                transition: background-color 0.3s;
+            }
+            #menu ul li a:hover {
+                background-color: #ddd;
+            }
+            #main {
+                flex-grow: 1;
+                padding: 20px;
+            }
+            .grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+                gap: 10px;
+            }
+            .grid-item {
+                background-color: #ddd;
+                padding: 20px;
+                text-align: center;
+                border-radius: 4px;
+            }
+        </style>
+    </head>
+    <body>
+
+        <div id="menu">
+            <ul>
+                <li>
+                    <a href="#" onclick="showGrid(1)">Grid 1</a>
+                </li>
+                <li>
+                    <a href="#" onclick="showGrid(2)">Grid 2</a>
+                </li>
+                <li>
+                    <a href="#" onclick="showGrid(3)">Grid 3</a>
+                </li>
+            </ul>
+        </div>
+
+        <div id="main">
+            <div id="grid-container" class="grid">
+                <!-- Initial grid content will be loaded here -->
+            </div>
+        </div>
+
+        <script>
+            function showGrid(gridNumber) {
+                const gridContainer = document.getElementById('grid-container');
+                gridContainer.innerHTML = ''; // Clear existing content
+
+                let content = '';
+
+                // Generate different grid content based on the selected menu item
+                switch (gridNumber) {
+                    case 1:
+                        content = '<div class="grid-item">Item 1-1</div><div class="grid-item">Item 1-2</div><div' +
+                                ' class="grid-item">Item 1-3</div>';
+                        break;
+                    case 2:
+                        content = '<div class="grid-item">Item 2-1</div><div class="grid-item">Item 2-2</div>';
+                        break;
+                    case 3:
+                        content = '<div class="grid-item">Item 3-1</div><div class="grid-item">Item 3-2</div><div' +
+                                ' class="grid-item">Item 3-3</div><div class="grid-item">Item 3-4</div>';
+                        break;
+                }
+
+                gridContainer.innerHTML = content;
+            }
+
+            // Load initial grid
+            showGrid(1);
+        </script>
+    </body>
+</html>
