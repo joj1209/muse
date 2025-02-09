@@ -35,8 +35,8 @@ def index(request):
     run_crawl_ev_og_portal()
     
     # 03. FinanceDataReader
-    p = FinanceDataReaderParser()    
-    p.run_api_finance_data_reader()  
+    # p = FinanceDataReaderParser()    
+    # p.run_api_finance_data_reader()  
     
     # # 04. Naver API(BLOG)
     p2 = NaverSearchApi()
@@ -50,7 +50,7 @@ def index(request):
     # # # run_api_kakao_ai_image()  #-->종료
     
     # # # 07. Kakao Talk Sendpy
-    run_api_kakao_talk()
+    # run_api_kakao_talk()
     
     # # # 08. 공공데이터:아파트실거래
     run_api_public_apt_trade()
