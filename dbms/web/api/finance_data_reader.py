@@ -68,7 +68,8 @@ class FinanceDataReaderParser():
         df_total.replace({pd.NaT: datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')}, inplace=True)
         
         # # # 열삭제 : 해외지수에 없는 6개 열 삭제
-        self.df = df_total.drop(['Change','UpDown','Comp','Amount','MarCap','Adj Close','index'],axis=1)
+        # self.df = df_total.drop(['Change','UpDown','Comp','Amount','MarCap','Adj Close','index'],axis=1)
+        self.df = df_total.drop(['Adj Close'],axis=1)
         
         # # # 컬럼명 재정의
         self.df.columns = ['strd_dt','market','stock_day','opening_price','high_price','low_price','closing_price','volume']

@@ -35,8 +35,8 @@ def index(request):
     run_crawl_ev_og_portal()
     
     # 03. FinanceDataReader
-    # p = FinanceDataReaderParser()    
-    # p.run_api_finance_data_reader()  
+    p = FinanceDataReaderParser()    
+    p.run_api_finance_data_reader()  
     
     # # 04. Naver API(BLOG)
     p2 = NaverSearchApi()
